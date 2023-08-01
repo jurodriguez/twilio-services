@@ -14,19 +14,19 @@ import org.springframework.beans.factory.annotation.Value;
 public class SmsMessageTwilioAdapter implements ISmsMessageTwilio {
 
     @Value("${TWILIO_ACCOUNT_SID}")
-    private String ACCOUNT_SID;
+    private String accountSid;
     @Value("${TWILIO_AUTH_TOKEN}")
-    private String AUTH_TOKEN;
+    private String authToken;
     @Value("${TWILIO_FROM_PHONE_NUMBER}")
-    private String FROM_PHONE_NUMBER;
+    private String fromPhoneNumber;
 
 
     @Override
     public void sendSmsMessage(SmsMessageModel smsMessageModel) {
-        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+        Twilio.init(accountSid, authToken);
         Message message = Message.creator(
                         new PhoneNumber(smsMessageModel.getNumber()),
-                        new PhoneNumber(FROM_PHONE_NUMBER),
+                        new PhoneNumber(fromPhoneNumber),
                         smsMessageModel.getMessage()).
                 create();
 
